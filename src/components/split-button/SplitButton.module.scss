@@ -1,0 +1,94 @@
+.split-button {
+  --theme: hsl(220, 75%, 50%);
+  --theme-hover: hsl(220, 75%, 45%);
+  --theme-active: hsl(220, 75%, 40%);
+  --theme-text: hsl(220, 75%, 25%);
+  --theme-border: hsl(220, 50%, 75%);
+  --ontheme: hsl(220, 90%, 98%);
+  --popupbg: hsl(220, 0%, 100%);
+  --border: 1px solid var(--theme-border);
+  --radius: 6px;
+  --in-speed: 500ms;
+  --out-speed: 100ms;
+  --shadow: 0px 1px 3px rgba(24, 24, 24, 0.1),
+    0px 1px 2px rgba(24, 24, 24, 0.06);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border);
+  background-color: var(--theme);
+  color: var(--ontheme);
+  border-radius: var(--radius);
+
+  button {
+    white-space: nowrap;
+    padding-block: 1.25ch;
+    padding-inline: 2.5ch;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 1px solid var(--ontheme);
+      outline-offset: -4px;
+    }
+
+    &:active {
+      background-color: var(--theme-active);
+    }
+  }
+  > button {
+    border-inline-end: var(--border);
+  }
+
+  .popup-button {
+    position: relative;
+    inline-size: 4ch;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:focus-within > i,
+    &:active > i {
+      transition: transform var(--in-speed) ease-in-out;
+      transform: rotate(180deg);
+    }
+
+    &:focus-within > .popup,
+    &:active > .popup {
+      transition-duration: var(--in-speed);
+      opacity: 1;
+      transform: translateY(-8px);
+      pointer-events: auto;
+    }
+    .popup {
+      opacity: 0;
+      position: absolute;
+      box-shadow: var(--shadow);
+      background-color: var(--popupbg);
+      color: var(--theme-text);
+      display: flex;
+      flex-direction: column;
+      gap: 1ch;
+      inset-block-end: 80%;
+      inset-inline-start: -1.5ch;
+      border-radius: var(--radius);
+
+      transform: translateY(5px);
+      transition: opacity var(--out-speed) ease, transform var(--out-speed) ease;
+
+      button {
+        display: inline-flex;
+        align-items: center;
+        gap: 1ch;
+        width: 100%;
+        font-size: 15px;
+
+        &:is(:focus-visible, :hover) {
+          background-color: var(--theme-hover);
+          color: var(--ontheme);
+        }
+      }
+    }
+  }
+}
