@@ -5,4 +5,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 32px;
+}
+
+.dir {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  border: thin solid #ccc;
+  border-radius: 6px;
+  padding-inline: 1rem;
 }

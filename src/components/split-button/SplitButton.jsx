@@ -1,39 +1,28 @@
-import { useState } from 'react';
 import styles from './SplitButton.module';
+import PropTypes from 'prop-types';
+import useKeyHandle from '~/hooks/useKeyHandle';
 
-const SplitButton = () => {
-  const [expanded, setExpanded] = useState(false);
+const SplitButton = ({ children, title, dir }) => {
+  /*   const handle = useKeyHandle('Escape', () => {
+    console.log(`📕 jhgjhg - 7:SplitButton.jsx \n`);
+  });
+  handle(); */
 
   return (
-    <div className={styles['split-button']}>
-      <button>View cart</button>
-      <span
-        className={styles['popup-button']}
-        aria-expanded={expanded}
-        tabIndex="-1"
-      >
+    <div className={styles['split-button']} dir={dir}>
+      <button>{title}</button>
+      <span className={styles['popup-button']} tabIndex="-1">
         <i className="far fa-chevron-down fa-fw" />
-        <ul className={styles.popup}>
-          <li>
-            <button>
-              <i className="far fa-shopping-cart"></i>
-              Checkout
-            </button>
-          </li>
-          <li>
-            <button>
-              <i class="far fa-sack-dollar"></i>Quick pay
-            </button>
-          </li>
-          <li>
-            <button>
-              <i class="fal fa-save"></i>Save for later
-            </button>
-          </li>
-        </ul>
+        <ul className={styles.popup}>{children}</ul>
       </span>
     </div>
   );
+};
+
+SplitButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  dir: PropTypes.string,
 };
 
 export default SplitButton;
